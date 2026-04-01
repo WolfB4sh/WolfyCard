@@ -1,55 +1,66 @@
 const tg = window.Telegram.WebApp;
-tg.expand(); // Abre la Mini App a pantalla completa
+tg.expand();
 
-// Función para simular la carga de datos (luego la conectaremos a tu bot)
-function cargarDatosPrueba() {
-    // Estos datos vendrán de tu usuarios.json
-    const datos = {
-        apodo: "LOBO",
-        bank_inicial: 1000,
-        bank_actual: 1250,
-        ganadas: 12,
-        perdidas: 4,
-        nivel: "Experto", // Novato, Medio, Superior, Experto
-        equipos: ["Spurs", "Astros", "Mets"] // El podio de siluetas
-    };
+// 1. Obtener datos del usuario desde Telegram
+const user = tg.initDataUnsafe?.user;
 
-    actualizarTarjeta(datos);
+async function cargarDatosReales() {
+    if (!user) {
+        console.error("No se detectó usuario de Telegram");
+        return;
+    }
+
+    try {
+        // Esta URL será la de tu bot (la configuraremos después)
+        // Por ahora, simulamos que el bot le responde a la Mini App
+        const respuesta = await fetch(`https://tu-servidor.com/api/user/${user.id}`);
+        const d = await respuesta.json();
+        actualizarTarjeta(d);
+    } catch (e) {
+        console.log("Usando modo local/prueba hasta conectar el backend");
+        // Datos de prueba pero con la estructura completa
+        actualizarTarjeta({
+            apodo: user?.first_name || "LOBO",
+            bank_inicial: 1000,
+            bank_actual: 1250,
+            ganadas: 15,
+            perdidas: 5,
+            individuales: 12,
+            parlays: 8,
+            efectividad: 75,
+            nivel: "Superior",
+            foto: user?.photo_url
+        });
+    }
 }
 
 function actualizarTarjeta(d) {
-    // 1. Datos de texto
     document.getElementById('apodo').innerText = d.apodo;
     document.getElementById('val-bank-ini').innerText = `$${d.bank_inicial}`;
     document.getElementById('val-bank-act').innerText = `$${d.bank_actual}`;
     document.getElementById('val-ganadas').innerText = d.ganadas;
     document.getElementById('val-perdidas').innerText = d.perdidas;
+    document.getElementById('val-indiv').innerText = d.individuales;
+    document.getElementById('val-parlays').innerText = d.parlays;
+    document.getElementById('val-efectividad').innerText = `${d.efectividad}%`;
     document.getElementById('nivel-texto').innerText = `NIVEL: ${d.nivel.toUpperCase()}`;
 
-    // 2. Lógica de Barras (Cálculo de porcentajes)
-    const total = d.ganadas + d.perdidas;
-    const efecGanadas = total > 0 ? (d.ganadas / total) * 100 : 0;
-    const efecPerdidas = total > 0 ? (d.perdidas / total) * 100 : 0;
-    
-    // El bank actual lo comparamos con el inicial para la barra
-    const porcBank = (d.bank_actual / d.bank_inicial) * 100;
+    if(d.foto) document.getElementById('foto-perfil').src = d.foto;
 
-    // Aplicar anmación a las barras
+    // Animación de barras
     setTimeout(() => {
-        document.getElementById('bar-bank-act').style.width = `${Math.min(porcBank, 100)}%`;
-        document.getElementById('bar-ganadas').style.width = `${efecGanadas}%`;
-        document.getElementById('bar-perdidas').style.width = `${efecPerdidas}%`;
+        const totalApuestas = d.ganadas + d.perdidas;
+        const totalTipos = d.individuales + d.parlays;
+
+        document.getElementById('bar-efectividad').style.width = `${d.efectividad}%`;
+        document.getElementById('bar-ganadas').style.width = `${(d.ganadas/totalApuestas)*100}%`;
+        document.getElementById('bar-perdidas').style.width = `${(d.perdidas/totalApuestas)*100}%`;
+        document.getElementById('bar-indiv').style.width = `${(d.individuales/totalTipos)*100}%`;
+        document.getElementById('bar-parlays').style.width = `${(d.parlays/totalTipos)*100}%`;
     }, 500);
 
-    // 3. Cambio de Clase por Nivel (Marcos y Colores)
     const card = document.getElementById('card');
-    card.className = ''; // Limpia clases
-    card.classList.add(`nivel-${d.nivel.toLowerCase()}`);
-
-    // 4. Siluetas (Podio)
-    // Aquí podrías poner lógica para cargar logos reales si los tienes
-    console.log("Podio de equipos listo:", d.equipos);
+    card.className = `nivel-${d.nivel.toLowerCase()}`;
 }
 
-// Inicializar
-window.onload = cargarDatosPrueba;
+window.onload = cargarDatosReales;
