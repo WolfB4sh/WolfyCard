@@ -1,6 +1,12 @@
 const tg = window.Telegram.WebApp;
-tg.expand();
+const user = tg.initDataUnsafe?.user;
 
+if (user && user.photo_url) {
+    document.getElementById('foto-perfil').src = user.photo_url;
+} else {
+    // Foto por defecto de Lobo si no hay foto en Telegram
+    document.getElementById('foto-perfil').src = "https://img.icons8.com/ios-filled/100/ffffff/wolf.png"; 
+}
 // 1. Obtener datos del usuario desde Telegram
 const user = tg.initDataUnsafe?.user;
 
