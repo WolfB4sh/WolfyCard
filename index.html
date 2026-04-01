@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Wolfy Card</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <div id="card" class="nivel-novato"> <div class="header">
+            <div class="perfil-container">
+                <div id="marco-perfil">
+                    <img id="foto-perfil" src="https://via.placeholder.com/100" alt="Lobo">
+                </div>
+            </div>
+            <h1 id="apodo">LOBO</h1>
+        </div>
+
+        <hr class="divisor">
+
+        <div class="stats-container">
+            <div class="stat-row">
+                <span>💰 Bank Inicial</span>
+                <div class="progress-bar"><div id="bar-bank-ini" style="width: 100%;"></div></div>
+                <span id="val-bank-ini">$0</span>
+            </div>
+            <div class="stat-row">
+                <span>📈 Bank Actual</span>
+                <div class="progress-bar"><div id="bar-bank-act"></div></div>
+                <span id="val-bank-act">$0</span>
+            </div>
+            <div class="stat-row">
+                <span>✅ Ganadas</span>
+                <div class="progress-bar"><div id="bar-ganadas"></div></div>
+                <span id="val-ganadas">0</span>
+            </div>
+            <div class="stat-row">
+                <span>💀 Perdidas</span>
+                <div class="progress-bar"><div id="bar-perdidas"></div></div>
+                <span id="val-perdidas">0</span>
+            </div>
+        </div>
+
+        <hr class="divisor">
+
+        <div class="podio-container">
+            <div id="equipo-3" class="silueta mini"></div>
+            <div id="equipo-1" class="silueta grande"></div>
+            <div id="equipo-2" class="silueta mediana"></div>
+        </div>
+
+        <hr class="divisor">
+
+        <div class="footer">
+            <span id="nivel-texto">NIVEL: NOVATO</span>
+            <img src="logo_wolfy.png" class="logo-autenticidad">
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
