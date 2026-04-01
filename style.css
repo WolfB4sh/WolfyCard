@@ -1,4 +1,4 @@
-/* --- BASE CON AURA RESTAURADA --- */
+/* --- BASE Y FONDO IRIDISCENTE --- */
 body {
     background-color: #000;
     display: flex;
@@ -12,101 +12,127 @@ body {
 }
 
 #card {
-    width: 90vw; /* Usa el ancho de la pantalla del cel */
-    max-width: 340px;
-    height: 92vh; /* Usa casi toda la altura de la pantalla */
-    max-height: 580px;
-    margin: auto;
+    width: 340px;
+    height: 580px;
+    border-radius: 20px;
+    padding: 20px;
+    position: relative;
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Esto separa el header del footer automáticamente */
-    padding: 15px;
-    box-sizing: border-box;
-}
-    /* FONDO IRIDISCENTE SATURADO */
-    background: rgba(20, 20, 25, 0.9);
+    align-items: center;
+    /* EFECTO TORNASOL / IRIDISCENTE */
+    background: linear-gradient(135deg, 
+        rgba(255,255,255,0.1) 0%, 
+        rgba(150,150,255,0.2) 25%, 
+        rgba(255,150,255,0.2) 50%, 
+        rgba(150,255,255,0.2) 75%, 
+        rgba(255,255,255,0.1) 100%);
     backdrop-filter: blur(10px);
     border: 2px solid rgba(255,255,255,0.1);
-    /* AURA DORADA EXPERTO (Activada por defecto para la vista previa) */
-    border: 3px solid #ffd700 !important;
-    box-shadow: 0 0 30px #ffd700;
 }
 
 /* --- MARCOS DINÁMICOS POR NIVEL --- */
-/* Estas clases se activarán por JS, pero restauran el brillo */
-.nivel-novato { border: 3px solid #555 !important; box-shadow: 0 0 15px #333; }
-.nivel-medio { border: 3px solid #cd7f32 !important; box-shadow: 0 0 15px #8b4513; }
-.nivel-superior { border: 3px solid #00f2fe !important; box-shadow: 0 0 15px #00f2fe; }
-.nivel-experto { border: 3px solid #ffd700 !important; box-shadow: 0 0 30px #ffd700; }
+.nivel-novato { border: 4px solid #4a4a4a !important; box-shadow: 0 0 15px #333 !important; }
+.nivel-medio { border: 4px solid #cd7f32 !important; box-shadow: 0 0 20px #8b4513 !important; }
+.nivel-superior { border: 4px solid #c0c0c0 !important; box-shadow: 0 0 25px #4682b4 !important; }
+.nivel-experto { border: 4px solid #ffd700 !important; box-shadow: 0 0 30px #ff8c00 !important; }
 
 /* --- PERFIL Y MARCO CIRCULAR --- */
-.perfil-container { width: 90px; height: 90px; margin-top: 10px; }
-#marco-perfil {
-    width: 100%;
-    height: 100%;
+.perfil-container {
+    margin-top: 20px;
+    width: 110px;
+    height: 110px;
     border-radius: 50%;
-    border: 2px solid #fff; /* Cambia con JS según nivel */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #111;
+}
+
+#marco-perfil {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid #fff; /* Cambia con JS según nivel */
     overflow: hidden;
 }
-#foto-perfil { width: 100%; height: 100%; object-fit: cover; }
-#apodo { font-size: 1.2rem; margin: 5px 0; text-transform: uppercase; }
 
-/* --- BARRAS DE STATS SATURADAS (ESTILO FIFA) --- */
-.stats-container {
-    flex-grow: 1; /* Esto hace que los stats ocupen el espacio central sobrante */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+#foto-perfil { width: 100%; height: 100%; object-fit: cover; }
+
+#apodo {
+    font-size: 1.5rem;
+    margin: 10px 0;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
 }
+
+/* --- BARRAS DE STATS (ESTILO FIFA) --- */
+.stats-container { width: 100%; margin: 15px 0; }
+.stat-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 0.85rem;
+}
+
 .progress-bar {
     flex-grow: 1;
-    height: 6px;
-    /* FONDO OSCURO PARA BARRAS */
-    background: rgba(0,0,0,0.3);
-    margin: 0 8px;
-    border-radius: 3px;
+    height: 8px;
+    background: rgba(255,255,255,0.1);
+    margin: 0 10px;
+    border-radius: 4px;
     overflow: hidden;
 }
+
 .progress-bar div {
     height: 100%;
-    /* COLORES NEÓN SATURADOS */
     background: linear-gradient(90deg, #00f2fe 0%, #4facfe 100%);
     width: 0%; /* Animado por JS */
     transition: width 1s ease-in-out;
 }
 
 .divisor {
-    width: 100%;
+    width: 90%;
     border: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-    margin: 5px 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+    margin: 10px 0;
 }
 
-/* --- PODIO DE EQUIPOS (SILUETAS AMPLIADAS) --- */
+/* --- PODIO DE EQUIPOS (SILUETAS) --- */
 .podio-container {
-    height: 80px;
-    margin-bottom: 10px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 15px;
+    height: 100px;
 }
+
 .silueta {
-    background: rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.1);
     border: 1px dashed rgba(255,255,255,0.3);
     mask-size: contain;
     mask-repeat: no-repeat;
     mask-position: center;
     background-color: white; /* Color de la silueta */
 }
+
 .grande { width: 70px; height: 70px; }
 .mediana { width: 55px; height: 55px; }
 .mini { width: 40px; height: 40px; }
 
-/* --- FOOTER RESTAURADO --- */
+/* --- FOOTER --- */
 .footer {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: auto;
+    padding-bottom: 10px;
 }
-#nivel-texto { font-size: 0.8rem; font-weight: bold; color: #ffd700; }
+
+#nivel-texto { font-weight: bold; font-size: 0.9rem; color: #00f2fe; }
 .logo-autenticidad { width: 40px; opacity: 0.7; }
