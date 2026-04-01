@@ -1,4 +1,4 @@
-/* --- BASE --- */
+/* --- BASE CON AURA RESTAURADA --- */
 body {
     background-color: #000;
     display: flex;
@@ -6,71 +6,106 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    font-family: sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: white;
     overflow: hidden;
 }
 
 #card {
-    width: 320px;
-    height: 560px; /* Tamaño ajustado para cel */
+    width: 330px; /* Tamaño ideal */
+    height: 560px;
     border-radius: 20px;
     padding: 15px;
     position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.15));
-    backdrop-filter: blur(15px);
+    /* FONDO IRIDISCENTE SATURADO */
+    background: rgba(20, 20, 25, 0.9);
+    backdrop-filter: blur(10px);
     border: 2px solid rgba(255,255,255,0.1);
+    /* AURA DORADA EXPERTO (Activada por defecto para la vista previa) */
+    border: 3px solid #ffd700 !important;
+    box-shadow: 0 0 30px #ffd700;
 }
 
-/* MARCOS */
+/* --- MARCOS DINÁMICOS POR NIVEL --- */
+/* Estas clases se activarán por JS, pero restauran el brillo */
 .nivel-novato { border: 3px solid #555 !important; box-shadow: 0 0 15px #333; }
 .nivel-medio { border: 3px solid #cd7f32 !important; box-shadow: 0 0 15px #8b4513; }
 .nivel-superior { border: 3px solid #00f2fe !important; box-shadow: 0 0 15px #00f2fe; }
-.nivel-experto { border: 3px solid #ffd700 !important; box-shadow: 0 0 20px #ffd700; }
+.nivel-experto { border: 3px solid #ffd700 !important; box-shadow: 0 0 30px #ffd700; }
 
+/* --- PERFIL Y MARCO CIRCULAR --- */
 .perfil-container { width: 90px; height: 90px; margin-top: 10px; }
-#marco-perfil { width: 100%; height: 100%; border-radius: 50%; border: 2px solid #fff; overflow: hidden; }
+#marco-perfil {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid #fff; /* Cambia con JS según nivel */
+    overflow: hidden;
+}
 #foto-perfil { width: 100%; height: 100%; object-fit: cover; }
 #apodo { font-size: 1.2rem; margin: 5px 0; text-transform: uppercase; }
 
-/* STATS OPTIMIZADOS */
+/* --- BARRAS DE STATS SATURADAS (ESTILO FIFA) --- */
 .stats-container { width: 100%; margin: 10px 0; }
 .stat-row {
     display: flex;
     align-items: center;
-    font-size: 0.75rem;
-    margin-bottom: 6px;
+    font-size: 0.7rem; /* Texto legible */
+    margin-bottom: 5px;
 }
-.stat-label { width: 90px; }
 .progress-bar {
     flex-grow: 1;
     height: 6px;
-    background: rgba(255,255,255,0.1);
-    border-radius: 3px;
+    /* FONDO OSCURO PARA BARRAS */
+    background: rgba(0,0,0,0.3);
     margin: 0 8px;
+    border-radius: 3px;
     overflow: hidden;
 }
-.progress-bar div { height: 100%; background: #00f2fe; width: 0%; transition: width 1s; }
-.stat-val { width: 45px; text-align: right; font-weight: bold; }
+.progress-bar div {
+    height: 100%;
+    /* COLORES NEÓN SATURADOS */
+    background: linear-gradient(90deg, #00f2fe 0%, #4facfe 100%);
+    width: 0%; /* Animado por JS */
+    transition: width 1s ease-in-out;
+}
 
-.divisor { width: 100%; border: 0; height: 1px; background: rgba(255,255,255,0.2); margin: 5px 0; }
+.divisor {
+    width: 100%;
+    border: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    margin: 5px 0;
+}
 
-/* PODIO REAL */
+/* --- PODIO DE EQUIPOS (SILUETAS AMPLIADAS) --- */
 .podio-container {
     display: flex;
     align-items: flex-end;
     justify-content: center;
     gap: 10px;
-    height: 60px;
-    margin-top: 5px;
+    height: 70px;
+    margin: 10px 0;
 }
-.silueta { background: rgba(255,255,255,0.2); border-radius: 5px; }
-.mini { width: 40px; height: 35px; }
-.mediana { width: 40px; height: 45px; }
-.grande { width: 40px; height: 55px; }
+.silueta {
+    background: rgba(255,255,255,0.2);
+    border: 1px dashed rgba(255,255,255,0.3);
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    background-color: white; /* Color de la silueta */
+}
+.grande { width: 70px; height: 70px; }
+.mediana { width: 55px; height: 55px; }
+.mini { width: 40px; height: 40px; }
 
-.footer { width: 100%; display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+/* --- FOOTER RESTAURADO --- */
+.footer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}
 #nivel-texto { font-size: 0.8rem; font-weight: bold; color: #ffd700; }
+.logo-autenticidad { width: 40px; opacity: 0.7; }
