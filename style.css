@@ -95,7 +95,7 @@ body {
 .logo-autenticidad {
     width: 35px;         /* Este es el tamaño ideal para que no robe cámara */
     height: auto;        /* Evita que se vea estirado o aplastado */
-    filter: drop-shadow(0 0 3px rgba(255, 215, 0, 0.3)); /* Un brillo dorado sutil */
+    filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.3)); /* Un brillo dorado sutil */
     vertical-align: middle; /* Por si lo pones al lado de un texto */
     margin: 5px;         /* Un poco de espacio para que respire */
 }
