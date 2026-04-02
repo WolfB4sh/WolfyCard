@@ -17,46 +17,67 @@ body {
     border-radius: 20px;
     padding: 15px;
     position: relative;
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.15));
+      /* EFECTO TORNASOL / IRIDISCENTE */
+    background: linear-gradient(135deg, 
+        rgba(255,255,255,0.1) 0%, 
+        rgba(150,150,255,0.2) 25%, 
+        rgba(255,150,255,0.2) 50%, 
+        rgba(150,255,255,0.2) 75%, 
+        rgba(255,255,255,0.1) 100%);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.1);
     backdrop-filter: blur(15px);
     border: 2px solid rgba(255,255,255,0.1);
 }
 
-/* MARCOS */
-.nivel-novato { border: 3px solid #555 !important; box-shadow: 0 0 15px #333; }
-.nivel-medio { border: 3px solid #cd7f32 !important; box-shadow: 0 0 15px #8b4513; }
-.nivel-superior { border: 3px solid #00f2fe !important; box-shadow: 0 0 15px #00f2fe; }
-.nivel-experto { border: 3px solid #ffd700 !important; box-shadow: 0 0 20px #ffd700; }
+/* --- MARCOS DINÁMICOS POR NIVEL --- */
+.nivel-novato { border: 4px solid #4a4a4a !important; box-shadow: 0 0 15px #333 !important; }
+.nivel-medio { border: 4px solid #cd7f32 !important; box-shadow: 0 0 20px #8b4513 !important; }
+.nivel-superior { border: 4px solid #c0c0c0 !important; box-shadow: 0 0 25px #4682b4 !important; }
+.nivel-experto { border: 4px solid #ffd700 !important; box-shadow: 0 0 30px #ff8c00 !important; }
 
 .perfil-container { width: 90px; height: 90px; margin-top: 10px; }
 #marco-perfil { width: 100%; height: 100%; border-radius: 50%; border: 2px solid #fff; overflow: hidden; }
 #foto-perfil { width: 100%; height: 100%; object-fit: cover; }
 #apodo { font-size: 1.2rem; margin: 5px 0; text-transform: uppercase; }
 
-/* STATS OPTIMIZADOS */
-.stats-container { width: 100%; margin: 10px 0; }
+/* --- BARRAS DE STATS (ESTILO FIFA) --- */
+.stats-container { width: 100%; margin: 15px 0; }
 .stat-row {
     display: flex;
     align-items: center;
-    font-size: 0.75rem;
-    margin-bottom: 6px;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 0.85rem;
 }
-.stat-label { width: 90px; }
+
 .progress-bar {
     flex-grow: 1;
-    height: 6px;
+    height: 8px;
     background: rgba(255,255,255,0.1);
-    border-radius: 3px;
-    margin: 0 8px;
+    margin: 0 10px;
+    border-radius: 4px;
     overflow: hidden;
 }
-.progress-bar div { height: 100%; background: #00f2fe; width: 0%; transition: width 1s; }
-.stat-val { width: 45px; text-align: right; font-weight: bold; }
 
-.divisor { width: 100%; border: 0; height: 1px; background: rgba(255,255,255,0.2); margin: 5px 0; }
+.progress-bar div {
+    height: 100%;
+    background: linear-gradient(90deg, #00f2fe 0%, #4facfe 100%);
+    width: 0%; /* Animado por JS */
+    transition: width 1s ease-in-out;
+}
+
+.divisor {
+    width: 90%;
+    border: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+    margin: 10px 0;
+}
 
 /* PODIO REAL */
 .podio-container {
