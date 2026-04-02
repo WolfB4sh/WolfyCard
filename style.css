@@ -31,7 +31,8 @@ body {
     backdrop-filter: blur(10px);
     border: 2px solid rgba(255,255,255,0.1);
     backdrop-filter: blur(15px);
-    border: 2px solid rgba(255,255,255,0.1);
+    border: 3px solid #ffd700 !important;
+    box-shadow: 0 0 30px #ffd700;
 }
 
 /* --- MARCOS DINÁMICOS POR NIVEL --- */
