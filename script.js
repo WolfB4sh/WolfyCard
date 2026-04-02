@@ -1,6 +1,10 @@
 const tg = window.Telegram.WebApp;
 const user = tg.initDataUnsafe?.user;
 
+// 2. Función para mostrar el nombre
+function cargarNombre() {
+    const elementoApodo = document.getElementById('apodo');
+    
 if (user && user.photo_url) {
     document.getElementById('foto-perfil').src = user.photo_url;
 } else {
