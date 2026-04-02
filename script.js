@@ -1,40 +1,60 @@
 const tg = window.Telegram.WebApp;
 const user = tg.initDataUnsafe?.user;
 
-// 1. CAPTURAR DATOS DEL LINK (Vienen del Bot.py)
+// 1. CAPTURAR DATOS QUE VIENEN DEL BOT (Link)
 const urlParams = new URLSearchParams(window.location.search);
-const apodoReal = urlParams.get('apodo');
-const bankReal = urlParams.get('bank');
+const apodoDelBot = urlParams.get('apodo');
+const bankDelBot = urlParams.get('bank');
 
+// 2. FUNCIÓN PRINCIPAL (Tu lógica original + Datos dinámicos)
 function cargarTarjeta() {
-    // A. PONER EL APODO Y BANK DEL JSON
-    if (apodoReal) {
-        document.getElementById('apodo').innerText = apodoReal;
-    }
-    if (bankReal) {
-        document.getElementById('val-bank-ini').innerText = `$${bankReal}`;
-    }
-
-    // B. JALAR LA FOTO REAL DE TELEGRAM
-    const fotoPerfil = document.getElementById('foto-perfil');
-    if (user && user.photo_url) {
-        fotoPerfil.src = user.photo_url;
+    // A. Ponemos el Apodo del JSON o el de Telegram si no hay
+    const elementoApodo = document.getElementById('apodo');
+    if (apodoDelBot) {
+        elementoApodo.innerText = apodoDelBot;
     } else {
-        // Logo de lobo blanco por defecto si no tiene foto
-        fotoPerfil.src = "https://img.icons8.com/ios-filled/100/ffffff/wolf.png";
+        elementoApodo.innerText = user?.first_name || "LOBO";
     }
 
-    // C. ACTIVAR ANIMACIÓN DE BARRAS (Con datos de ejemplo por ahora)
-    // Cuando quieras que estas barras también vengan del bot, se hace igual que el apodo
-    setTimeout(() => {
-        document.getElementById('bar-bank-ini').style.width = "100%";
-        document.getElementById('bar-efectividad').style.width = "75%"; // Ejemplo
-    }, 500);
+    // B. Ponemos el Bank Inicial del JSON
+    if (bankDelBot) {
+        document.getElementById('val-bank-ini').innerText = `$${bankDelBot}`;
+    }
 
-    // D. ASEGURAR NIVEL EXPERTO (Tu aura dorada)
+    // C. Foto de Perfil (Telegram o Default)
+    if (user && user.photo_url) {
+        document.getElementById('foto-perfil').src = user.photo_url;
+    } else {
+        document.getElementById('foto-perfil').src = "https://img.icons8.com/ios-filled/100/ffffff/wolf.png";
+    }
+
+    // D. LÓGICA DE NIVELES Y BARRAS (Tu código original que no debí borrar)
+    // Aquí usamos datos de ejemplo que luego podrás conectar igual que el Apodo
+    const datosStats = {
+        ganadas: 15,
+        perdidas: 5,
+        individuales: 12,
+        parlays: 8,
+        efectividad: 75,
+        nivel: "experto" // Esto define el marco dorado
+    };
+
+    // Aplicar el nivel al cuerpo de la tarjeta
     const card = document.getElementById('card');
-    card.className = "nivel-experto"; 
+    card.className = `nivel-${datosStats.nivel}`; 
+
+    // Animación de las barras
+    setTimeout(() => {
+        const totalApuestas = datosStats.ganadas + datosStats.perdidas;
+        const totalTipos = datosStats.individuales + datosStats.parlays;
+
+        document.getElementById('bar-efectividad').style.width = `${datosStats.efectividad}%`;
+        document.getElementById('bar-ganadas').style.width = `${(datosStats.ganadas/totalApuestas)*100}%`;
+        document.getElementById('bar-perdidas').style.width = `${(datosStats.perdidas/totalApuestas)*100}%`;
+        document.getElementById('bar-indiv').style.width = `${(datosStats.individuales/totalTipos)*100}%`;
+        document.getElementById('bar-parlays').style.width = `${(datosStats.parlays/totalTipos)*100}%`;
+    }, 500);
 }
 
-// Ejecutar todo al abrir
+// 3. EJECUTAR AL CARGAR
 window.onload = cargarTarjeta;
