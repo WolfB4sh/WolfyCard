@@ -38,7 +38,18 @@ body {
 .nivel-medio { border: 4px solid #cd7f32 !important; box-shadow: 0 0 20px #8b4513 !important; }
 .nivel-superior { border: 4px solid #c0c0c0 !important; box-shadow: 0 0 25px #4682b4 !important; }
 .nivel-experto { border: 4px solid #ffd700 !important; box-shadow: 0 0 30px #ff8c00 !important; }
+/* Busca la parte de los niveles y añade este: */
+.nivel-leyenda { 
+    border: 4px solid #00ffff !important; 
+    box-shadow: 0 0 40px #00ffff, inset 0 0 20px rgba(0, 255, 255, 0.2) !important; 
+}
 
+/* Nota: En tu #card original del CSS, borré el border y box-shadow fijo 
+para que solo se vea el que el JS asigne según el nivel */
+#card {
+    /* ... tus otros estilos ... */
+    border: 4px solid transparent; /* Ahora lo controla el nivel */
+}
 .perfil-container { width: 90px; height: 90px; margin-top: 10px; }
 #marco-perfil { width: 100%; height: 100%; border-radius: 50%; border: 2px solid #fff; overflow: hidden; }
 #foto-perfil { width: 100%; height: 100%; object-fit: cover; }
