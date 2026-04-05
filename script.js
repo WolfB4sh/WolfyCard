@@ -1,5 +1,4 @@
-alert("EL SCRIPT ESTA VIVO EN GITHUB");
-/*
+alert("1 EL SCRIPT ESTA VIVO EN GITHUB");
 const tg = window.Telegram.WebApp;
 const user = tg.initDataUnsafe?.user;
 
@@ -15,7 +14,7 @@ const parlays = parseInt(urlParams.get('par')) || 0;
 const totalTipos = indiv + parlays;
 
 function cargarTarjeta() {
-    alert("CONTENIDO DEL LINK: " + window.location.search); 
+    alert("2 CONTENIDO DEL LINK: " + window.location.search); 
 
     const urlParams = new URLSearchParams(window.location.search);
     // A. Mostrar Apodo y Banks
