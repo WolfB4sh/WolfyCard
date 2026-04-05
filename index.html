@@ -8,7 +8,8 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
-    <div id="card" class="nivel-novato"> <div class="header">
+    <div id="card" class="nivel-novato"> 
+        <div class="header">
             <div class="perfil-container">
                 <div id="marco-perfil">
                     <img id="foto-perfil" src="https://via.placeholder.com/100" alt="Lobo">
@@ -20,45 +21,46 @@
         <hr class="divisor">
 
         <div class="stats-container">
-    <div class="stat-row">
-        <span>💰 Bank Inicial</span>
-        <div class="progress-bar"><div id="bar-bank-ini" style="width: 100%;"></div></div>
-        <span id="val-bank-ini">$0</span>
-    </div>
-    <div class="stat-row">
-        <span>📈 Bank Actual</span>
-        <div class="progress-bar"><div id="bar-bank-act"></div></div>
-        <span id="val-bank-act">$0</span>
-    </div>
-    
-    <hr class="divisor-mini">
+            <div class="stat-row">
+                <span>💰 Bank Inicial</span>
+                <div class="progress-bar"><div id="bar-bank-ini" style="width: 100%;"></div></div>
+                <span id="val-bank-ini">$0</span>
+            </div>
+            <div class="stat-row">
+                <span>📈 Bank Actual</span>
+                <div class="progress-bar"><div id="bar-bank-act"></div></div>
+                <span id="val-bank-act">$0</span>
+            </div>
+            
+            <hr class="divisor-mini">
 
-    <div class="stat-row">
-        <span>🎯 Efectividad</span>
-        <div class="progress-bar"><div id="bar-efectividad" style="background: linear-gradient(90deg, #ff8c00, #ffd700);"></div></div>
-        <span id="val-efectividad">0%</span>
-    </div>
-    <div class="stat-row">
-        <span>✅ Ganadas</span>
-        <div class="progress-bar"><div id="bar-ganadas"></div></div>
-        <span id="val-ganadas">0</span>
-    </div>
-    <div class="stat-row">
-        <span>💀 Perdidas</span>
-        <div class="progress-bar"><div id="bar-perdidas"></div></div>
-        <span id="val-perdidas">0</span>
-    </div>
-    <div class="stat-row">
-        <span>🏃 Individuales</span>
-        <div class="progress-bar"><div id="bar-indiv"></div></div>
-        <span id="val-indiv">0</span>
-    </div>
-    <div class="stat-row">
-        <span>🔥 Parlays</span>
-        <div class="progress-bar"><div id="bar-parlays"></div></div>
-        <span id="val-parlays">0</span>
-    </div>
-</div>
+            <div class="stat-row">
+                <span>🎯 Efectividad</span>
+                <div class="progress-bar"><div id="bar-efectividad"></div></div>
+                <span id="val-efectividad">0%</span>
+            </div>
+            <div class="stat-row">
+                <span>✅ Ganadas</span>
+                <div class="progress-bar"><div id="bar-ganadas"></div></div>
+                <span id="val-ganadas">0</span>
+            </div>
+            <div class="stat-row">
+                <span>💀 Perdidas</span>
+                <div class="progress-bar"><div id="bar-perdidas"></div></div>
+                <span id="val-perdidas">0</span>
+            </div>
+
+            <div class="stat-row">
+                <span>🏃 Individuales</span>
+                <div class="progress-bar"><div id="bar-indiv"></div></div>
+                <span id="val-indiv">0</span>
+            </div>
+            <div class="stat-row">
+                <span>🔥 Parlays</span>
+                <div class="progress-bar"><div id="bar-parlays"></div></div>
+                <span id="val-parlays">0</span>
+            </div>
+        </div>
 
         <hr class="divisor">
 
@@ -71,7 +73,12 @@
         <hr class="divisor">
 
         <div class="footer">
-    <span id="nivel-texto">NIVEL: NOVATO</span>
-    <button id="btn-ranking" onclick="window.Telegram.WebApp.showAlert('Ranking próximamente...')">🏆 RANKING</button>
-    <img src="WolfB4shF2.png" class="logo-autenticidad">
-</div>
+            <span id="nivel-texto">NIVEL: NOVATO</span>
+            <button id="btn-ranking" onclick="window.Telegram.WebApp.showAlert('Ranking próximamente...')">🏆 RANKING</button>
+            <img src="WolfB4shF2.png" class="logo-autenticidad">
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
