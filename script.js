@@ -13,6 +13,9 @@ const parlays = parseInt(urlParams.get('par')) || 0;
 const totalTipos = indiv + parlays;
 
 function cargarTarjeta() {
+    alert("CONTENIDO DEL LINK: " + window.location.search); 
+
+    const urlParams = new URLSearchParams(window.location.search);
     // A. Mostrar Apodo y Banks
     document.getElementById('apodo').innerText = apodo;
     document.getElementById('val-bank-ini').innerText = `$${bankIni}`;
