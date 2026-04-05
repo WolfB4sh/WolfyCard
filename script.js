@@ -16,7 +16,6 @@ const totalTipos = indiv + parlays;
 function cargarTarjeta() {
     alert("2 CONTENIDO DEL LINK: " + window.location.search); 
 
-    const urlParams = new URLSearchParams(window.location.search);
     // A. Mostrar Apodo y Banks
     document.getElementById('apodo').innerText = apodo;
     document.getElementById('val-bank-ini').innerText = `$${bankIni}`;
@@ -24,20 +23,20 @@ function cargarTarjeta() {
     document.getElementById('val-indiv').innerText = indiv;
     document.getElementById('val-parlays').innerText = parlays;
 
+    // AQUÍ ESTABA EL ERROR (Ya le puse las comillas ` ` )
     if (totalTipos > 0) {
-        document.getElementById('bar-indiv').style.width = ${(indiv/totalTipos)*100}%;
-        document.getElementById('bar-parlays').style.width = ${(parlays/totalTipos)*100}%;
+        document.getElementById('bar-indiv').style.width = `${(indiv/totalTipos)*100}%`;
+        document.getElementById('bar-parlays').style.width = `${(parlays/totalTipos)*100}%`;
     }
-    // B. Foto de Perfil Real de Telegram
-    // tg.initDataUnsafe.user.photo_url es la clave
+    
+    // B. Foto de Perfil
     if (user && user.photo_url) {
         document.getElementById('foto-perfil').src = user.photo_url;
-    } 
-        else {
-            document.getElementById('foto-perfil').src = "https://img.icons8.com/ios-filled/100/ffffff/wolf.png";
+    } else {
+        document.getElementById('foto-perfil').src = "https://img.icons8.com/ios-filled/100/ffffff/wolf.png";
     }
 
-    // C. Lógica de Efectividad y Niveles
+    // C. Lógica de Efectividad
     const total = ganadas + perdidas;
     const efectividad = total > 0 ? Math.round((ganadas / total) * 100) : 0;
     
@@ -45,11 +44,11 @@ function cargarTarjeta() {
     document.getElementById('val-ganadas').innerText = ganadas;
     document.getElementById('val-perdidas').innerText = perdidas;
 
-    // D. Determinar Rango (Novato, Intermedio, Experto, Leyenda)
+    // D. Determinar Rango
     let nivelClase = "nivel-novato";
     let nivelTexto = "NIVEL: NOVATO 🐾";
 
-    if (total >= 5) { // Solo sube de nivel si tiene al menos 5 apuestas
+    if (total >= 5) {
         if (efectividad >= 85) {
             nivelClase = "nivel-leyenda";
             nivelTexto = "NIVEL: LEYENDA 👑";
@@ -62,9 +61,8 @@ function cargarTarjeta() {
         }
     }
 
-    // Aplicar nivel visualmente
     const card = document.getElementById('card');
-    card.className = nivelClase; 
+    if (card) card.className = nivelClase; 
     document.getElementById('nivel-texto').innerText = nivelTexto;
 
     // E. Animación de Barras
@@ -74,7 +72,6 @@ function cargarTarjeta() {
             document.getElementById('bar-ganadas').style.width = `${(ganadas/total)*100}%`;
             document.getElementById('bar-perdidas').style.width = `${(perdidas/total)*100}%`;
         }
-        // Barra de bank actual comparada con el inicial
         const progresoBank = bankIni > 0 ? (bankAct / bankIni) * 100 : 0;
         document.getElementById('bar-bank-act').style.width = `${Math.min(progresoBank, 100)}%`;
     }, 500);
