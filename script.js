@@ -8,13 +8,22 @@ const bankIni = parseFloat(urlParams.get('bank_ini')) || 0;
 const bankAct = parseFloat(urlParams.get('bank_act')) || 0;
 const ganadas = parseInt(urlParams.get('g')) || 0;
 const perdidas = parseInt(urlParams.get('p')) || 0;
+const indiv = parseInt(urlParams.get('ind')) || 0;
+const parlays = parseInt(urlParams.get('par')) || 0;
+const totalTipos = indiv + parlays;
 
 function cargarTarjeta() {
     // A. Mostrar Apodo y Banks
     document.getElementById('apodo').innerText = apodo;
     document.getElementById('val-bank-ini').innerText = `$${bankIni}`;
     document.getElementById('val-bank-act').innerText = `$${bankAct}`;
+    document.getElementById('val-indiv').innerText = indiv;
+    document.getElementById('val-parlays').innerText = parlays;
 
+    if (totalTipos > 0) {
+        document.getElementById('bar-indiv').style.width = ${(indiv/totalTipos)*100}%;
+        document.getElementById('bar-parlays').style.width = ${(parlays/totalTipos)*100}%;
+}
     // B. Foto de Perfil Real de Telegram
     // tg.initDataUnsafe.user.photo_url es la clave
     if (user && user.photo_url) {
