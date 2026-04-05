@@ -30,10 +30,11 @@ function cargarTarjeta() {
     }
     
     // B. Foto de Perfil
-    if (user && user.photo_url) {
-        document.getElementById('foto-perfil').src = user.photo_url;
+    // Cambia tu bloque de foto por este que es más "necio":
+    if (tg.initDataUnsafe && tg.initDataUnsafe.user && tg.initDataUnsafe.user.photo_url) {
+    document.getElementById('foto-perfil').src = tg.initDataUnsafe.user.photo_url;
     } else {
-        document.getElementById('foto-perfil').src = "https://img.icons8.com/ios-filled/100/ffffff/wolf.png";
+    document.getElementById('foto-perfil').src = "https://img.icons8.com/ios-filled/100/ffffff/wolf.png";
     }
 
     // C. Lógica de Efectividad
