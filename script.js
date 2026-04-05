@@ -1,3 +1,5 @@
+alert("EL SCRIPT ESTA VIVO EN GITHUB");
+/*
 const tg = window.Telegram.WebApp;
 const user = tg.initDataUnsafe?.user;
 
