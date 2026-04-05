@@ -27,7 +27,7 @@ function cargarTarjeta() {
     if (totalTipos > 0) {
         document.getElementById('bar-indiv').style.width = ${(indiv/totalTipos)*100}%;
         document.getElementById('bar-parlays').style.width = ${(parlays/totalTipos)*100}%;
-}
+    }
     // B. Foto de Perfil Real de Telegram
     // tg.initDataUnsafe.user.photo_url es la clave
     if (user && user.photo_url) {
