@@ -32,8 +32,9 @@ function cargarTarjeta() {
     // tg.initDataUnsafe.user.photo_url es la clave
     if (user && user.photo_url) {
         document.getElementById('foto-perfil').src = user.photo_url;
-    } else {
-        document.getElementById('foto-perfil').src = "https://img.icons8.com/ios-filled/100/ffffff/wolf.png";
+    } 
+        else {
+            document.getElementById('foto-perfil').src = "https://img.icons8.com/ios-filled/100/ffffff/wolf.png";
     }
 
     // C. Lógica de Efectividad y Niveles
