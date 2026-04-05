@@ -1,60 +1,69 @@
 const tg = window.Telegram.WebApp;
 const user = tg.initDataUnsafe?.user;
 
-// 1. CAPTURAR DATOS QUE VIENEN DEL BOT (Link)
+// 1. CAPTURAR DATOS DEL LINK (Vienen del bot.py)
 const urlParams = new URLSearchParams(window.location.search);
-const apodoDelBot = urlParams.get('apodo');
-const bankDelBot = urlParams.get('bank');
+const apodo = urlParams.get('apodo') || "USUARIOjs";
+const bankIni = parseFloat(urlParams.get('bank_ini')) || 0;
+const bankAct = parseFloat(urlParams.get('bank_act')) || 0;
+const ganadas = parseInt(urlParams.get('g')) || 0;
+const perdidas = parseInt(urlParams.get('p')) || 0;
 
-// 2. FUNCIÓN PRINCIPAL (Tu lógica original + Datos dinámicos)
 function cargarTarjeta() {
-    // A. Ponemos el Apodo del JSON o el de Telegram si no hay
-    const elementoApodo = document.getElementById('apodo');
-    if (apodoDelBot) {
-        elementoApodo.innerText = apodoDelBot;
-    } else {
-        elementoApodo.innerText = user?.first_name || "LOBO";
-    }
+    // A. Mostrar Apodo y Banks
+    document.getElementById('apodo').innerText = apodo;
+    document.getElementById('val-bank-ini').innerText = `$${bankIni}`;
+    document.getElementById('val-bank-act').innerText = `$${bankAct}`;
 
-    // B. Ponemos el Bank Inicial del JSON
-    if (bankDelBot) {
-        document.getElementById('val-bank-ini').innerText = `$${bankDelBot}`;
-    }
-
-    // C. Foto de Perfil (Telegram o Default)
+    // B. Foto de Perfil Real de Telegram
+    // tg.initDataUnsafe.user.photo_url es la clave
     if (user && user.photo_url) {
         document.getElementById('foto-perfil').src = user.photo_url;
     } else {
         document.getElementById('foto-perfil').src = "https://img.icons8.com/ios-filled/100/ffffff/wolf.png";
     }
 
-    // D. LÓGICA DE NIVELES Y BARRAS (Tu código original que no debí borrar)
-    // Aquí usamos datos de ejemplo que luego podrás conectar igual que el Apodo
-    const datosStats = {
-        ganadas: 15,
-        perdidas: 5,
-        individuales: 12,
-        parlays: 8,
-        efectividad: 75,
-        nivel: "experto" // Esto define el marco dorado
-    };
+    // C. Lógica de Efectividad y Niveles
+    const total = ganadas + perdidas;
+    const efectividad = total > 0 ? Math.round((ganadas / total) * 100) : 0;
+    
+    document.getElementById('val-efectividad').innerText = `${efectividad}%`;
+    document.getElementById('val-ganadas').innerText = ganadas;
+    document.getElementById('val-perdidas').innerText = perdidas;
 
-    // Aplicar el nivel al cuerpo de la tarjeta
+    // D. Determinar Rango (Novato, Intermedio, Experto, Leyenda)
+    let nivelClase = "nivel-novato";
+    let nivelTexto = "NIVEL: NOVATO 🐾";
+
+    if (total >= 5) { // Solo sube de nivel si tiene al menos 5 apuestas
+        if (efectividad >= 85) {
+            nivelClase = "nivel-leyenda";
+            nivelTexto = "NIVEL: LEYENDA 👑";
+        } else if (efectividad >= 70) {
+            nivelClase = "nivel-experto";
+            nivelTexto = "NIVEL: EXPERTO 🔥";
+        } else if (efectividad >= 50) {
+            nivelClase = "nivel-medio";
+            nivelTexto = "NIVEL: INTERMEDIO 🐺";
+        }
+    }
+
+    // Aplicar nivel visualmente
     const card = document.getElementById('card');
-    card.className = `nivel-${datosStats.nivel}`; 
+    card.className = nivelClase; 
+    document.getElementById('nivel-texto').innerText = nivelTexto;
 
-    // Animación de las barras
+    // E. Animación de Barras
     setTimeout(() => {
-        const totalApuestas = datosStats.ganadas + datosStats.perdidas;
-        const totalTipos = datosStats.individuales + datosStats.parlays;
-
-        document.getElementById('bar-efectividad').style.width = `${datosStats.efectividad}%`;
-        document.getElementById('bar-ganadas').style.width = `${(datosStats.ganadas/totalApuestas)*100}%`;
-        document.getElementById('bar-perdidas').style.width = `${(datosStats.perdidas/totalApuestas)*100}%`;
-        document.getElementById('bar-indiv').style.width = `${(datosStats.individuales/totalTipos)*100}%`;
-        document.getElementById('bar-parlays').style.width = `${(datosStats.parlays/totalTipos)*100}%`;
+        document.getElementById('bar-efectividad').style.width = `${efectividad}%`;
+        if (total > 0) {
+            document.getElementById('bar-ganadas').style.width = `${(ganadas/total)*100}%`;
+            document.getElementById('bar-perdidas').style.width = `${(perdidas/total)*100}%`;
+        }
+        // Barra de bank actual comparada con el inicial
+        const progresoBank = bankIni > 0 ? (bankAct / bankIni) * 100 : 0;
+        document.getElementById('bar-bank-act').style.width = `${Math.min(progresoBank, 100)}%`;
     }, 500);
 }
 
-// 3. EJECUTAR AL CARGAR
 window.onload = cargarTarjeta;
