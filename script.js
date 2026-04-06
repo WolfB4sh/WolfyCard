@@ -30,12 +30,22 @@ function cargarTarjeta() {
     }
     
     // B. Foto de Perfil
-    // Cambia tu bloque de foto por este que es más "necio":
-    if (tg.initDataUnsafe && tg.initDataUnsafe.user && tg.initDataUnsafe.user.photo_url) {
-    document.getElementById('foto-perfil').src = tg.initDataUnsafe.user.photo_url;
-    } else {
-    document.getElementById('foto-perfil').src = "https://img.icons8.com/ios-filled/100/ffffff/wolf.png";
-    }
+    // 1. Extraer el user_id de la URL
+const urlParams = new URLSearchParams(window.location.search);
+const userId = urlParams.get('user_id');
+
+// 2. Referencia al elemento de la foto en el HTML
+const fotoPerfil = document.getElementById('foto-perfil');
+
+if (userId) {
+    // Intentamos cargar la foto que guardó el bot en la misma carpeta
+    fotoPerfil.src = `perfil_${userId}.jpg`;
+    
+    // Si la foto no existe o no carga, ponemos el logo del lobo por defecto
+    fotoPerfil.onerror = function() {
+        this.src = "https://img.icons8.com/ios-filled/100/ffffff/wolf.png";
+    };
+}
 
     // C. Lógica de Efectividad
     const total = ganadas + perdidas;
